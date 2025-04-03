@@ -1,0 +1,114 @@
+CSS 
+
+/* Light mode theme */
+body.light-mode {
+    --e-global-color-primary: black;
+    --e-global-color-secondary: white;
+    --e-global-color-text: #7A7A7A;
+    --e-global-color-accent: #61CE70;
+
+    background-color: #ffffff;
+  
+    /* Header background color for light mode */
+    --header-bg-color: white;
+}
+
+/* Dark mode (default theme using :root) */
+:root {
+    --e-global-color-primary: white;
+    --e-global-color-secondary: black;
+    --e-global-color-text: #7A7A7A;
+    --e-global-color-accent: #61CE70;
+
+    /* Header background color for dark mode */
+     /* You can change this to your preferred dark color */
+}
+
+/* Header background color based on mode */
+/* #masthead .ast-container, 
+.site-header-focus-item + .ast-breadcrumbs-wrapper {
+    background-color: var(--e-global-color-primary);
+} */
+
+/* Floating toggle button styles */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--e-global-color-primary);
+    color: var(--e-global-color-secondary);
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    color: var(--e-global-color-secondary);
+    background-color: var(--e-global-color-primary);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    background-color: var(--e-global-color-primary);
+}
+
+
+JS
+
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("toggle-theme");
+    const icon = toggleButton.querySelector("i");
+
+    // Check localStorage for the theme, default to dark mode
+    const currentTheme = localStorage.getItem("theme") || "dark-mode";
+    document.body.classList.add(currentTheme);
+
+    // Update icon based on the current theme
+    icon.className = currentTheme === "dark-mode" ? "fas fa-moon" : "fas fa-sun";
+
+    toggleButton.addEventListener("click", function () {
+        const isLightMode = document.body.classList.contains("light-mode");
+
+        // Toggle the theme
+        const newTheme = isLightMode ? "dark-mode" : "light-mode";
+        document.body.classList.remove("light-mode", "dark-mode");
+        document.body.classList.add(newTheme);
+
+        // Update localStorage
+        localStorage.setItem("theme", newTheme);
+
+        // Update the icon
+        icon.className = isLightMode ? "fas fa-moon" : "fas fa-sun";
+    });
+});
+
+
+
+HTML
+
+
+
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light/Dark Mode Toggle</title>
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <!-- Content -->
+    <!-- Theme Toggle Button -->
+    <button id="toggle-theme" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+</body>
+</html>
+
