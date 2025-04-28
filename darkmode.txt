@@ -112,3 +112,117 @@ HTML
 </body>
 </html>
 
+
+
+
+#PRELOADER 
+
+Below is the HTML / JS. 
+Instruction > Paste inside HTML wdiget in a section, and set the z-index to = 9999
+
+<div class="page-preloader">
+  <div class="preloader-wrapper">
+    <div id="num-wrapper" class="preloader-num-wrapper">
+      <p id="preloader-num">0%</p>
+    </div>
+  </div>
+
+  <div class="preloader-bottom">
+    <div id="preText" class="preloader-text">Your magic +my lens=timeless moments.</div>
+    <img src="https://theajibadeisrael.com/wp-content/uploads/2025/03/Ajibade-Isreal-web-logob.png" alt="Logo" class="preloader-logo" />
+  </div>
+</div>
+
+
+
+<script>
+let count = 1;
+let counterArray = [0, 36, 48, 64, 72, 84, 92, 100];
+
+document.querySelector("#preloader-num").textContent = `${counterArray[count]}%`;
+
+window.addEventListener("DOMContentLoaded", () => {
+  let preload = setInterval(() => {
+    document.querySelector("#preloader-num").textContent = `${counterArray[count]}%`;
+    count++;
+    if (count === counterArray.length) {
+      clearInterval(preload);
+      let tlPre = gsap.timeline();
+      tlPre.to("#preloader-num", { y: "130%" });
+      tlPre.to(".page-preloader", { opacity: 0 });
+      tlPre.to(".page-preloader", { display: "none" });
+    }
+  }, 250);
+});
+</script>
+
+
+
+
+CSS 
+
+
+.page-preloader {
+  z-index: 1000;
+  background-color: #000;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+/* Center the number perfectly */
+.preloader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.preloader-num-wrapper {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Bottom left and bottom right fixed */
+.preloader-bottom {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.preloader-text {
+  font-family: sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.preloader-logo {
+  width: 120px; /* Adjust logo size here */
+  height: auto;
+}
+
+
+/* Reset margins and padding on all devices */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+
+
